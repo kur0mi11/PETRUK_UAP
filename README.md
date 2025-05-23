@@ -1,6 +1,4 @@
-Project UAP Petruk
-Ilmu Komputer - A
-Kelompok 12
+Project UAP Petruk (Kelompok 12)
 
 Anggota Kelompok:
 1. Zahra Ayu Azizah (2417051007)
