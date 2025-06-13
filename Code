@@ -148,3 +148,46 @@ int main() {
 
         cout << "\nSilakan ulangi input.\n";
     }
+
+    int batasDaya;
+    cout << "\nMasukkan batas konsumsi daya harian (Watt): ";
+    cin >> batasDaya;
+    cin.ignore();
+
+    HasilKnapsack hasilKnapsack = knapsack(perangkatTerpilih, batasDaya);
+	vector<Perangkat> solusi = hasilKnapsack.perangkatTerpilih;
+	int manfaatTotal = hasilKnapsack.totalManfaat;
+
+    for (size_t i = 0; i < solusi.size(); i++) {
+        if (solusi[i].nama == "Kulkas") {
+            solusi[i].jam_pakai = 24;
+        } else if (solusi[i].nama == "AC") {
+            solusi[i].jam_pakai = 8;
+        } else if (solusi[i].nama == "Lampu") {
+            solusi[i].jam_pakai = 12;
+        } else {
+            solusi[i].jam_pakai = min(6.0, 24.0 * (solusi[i].manfaat / (double)manfaatTotal));
+        }
+    }
+
+    double totalKonsumsi = 0;
+    for (size_t i = 0; i < solusi.size(); i++) {
+        totalKonsumsi += solusi[i].watt * solusi[i].jam_pakai;
+    }
+
+    cout << "\n============================================================\n";
+    cout << " REKOMENDASI PENGGUNAAN PERANGKAT ELEKTRONIK\n";
+    cout << "============================================================\n";
+    for (size_t i = 0; i < solusi.size(); i++) {
+        const Perangkat* p = &solusi[i];
+        cout << "- " << p->nama << ": ";
+        tampilkanJamMenit(p->jam_pakai);
+        cout << " (Konsumsi: " << (int)(p->watt * p->jam_pakai) << " Wh)\n";
+    }
+
+    cout << "\nTotal Manfaat: " << manfaatTotal << "\n";
+    cout << "Total Konsumsi Energi: " << (int)totalKonsumsi << " Wh (Batas: " << batasDaya << " Wh)\n";
+    cout << "Persentase Penggunaan: " << (int)((totalKonsumsi / batasDaya) * 100) << "%\n";
+
+    return 0;
+}
