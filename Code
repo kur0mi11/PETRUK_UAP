@@ -47,9 +47,6 @@ Perangkat perangkatArray[JUMLAH_PERANGKAT] = {
     {"Televisi", 250, 7}
 };
 
-return 0;
-}
-
 void tampilkanPerangkatPointer(const Perangkat* p) {
     if (p != nullptr) {
         cout << "- " << p->nama << " (" << p->watt << "W, manfaat: " << p->manfaat << ")\n";
