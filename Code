@@ -103,3 +103,48 @@ HasilKnapsack knapsack(vector<Perangkat>& perangkat, int batasDaya) {
 
     return HasilKnapsack{dp[n][batasDaya], terpilih};
 }
+
+int main() {
+    judul();
+    char namaInput[100];
+    char konfirmasi;
+    vector<Perangkat> perangkatTerpilih;
+
+    while (true) {
+        perangkatTerpilih.clear();
+        tampilkanPerangkat();
+
+        cout << "\nMasukkan nama perangkat yang ingin digunakan satu per satu (ketik 'selesai' untuk berhenti):\n";
+        while (true) {
+            cout << "> ";
+            cin.getline(namaInput, 100);
+
+            if (strcasecmp(namaInput, "selesai") == 0) break;
+
+            bool ditemukan = false;
+            for (int i = 0; i < JUMLAH_PERANGKAT; i++) {
+                if (strcasecmp(perangkatArray[i].nama.c_str(), namaInput) == 0) {
+                    perangkatTerpilih.push_back(perangkatArray[i]);
+                    ditemukan = true;
+                    break;
+                }
+            }
+
+            if (!ditemukan) {
+                cout << "Nama perangkat tidak ditemukan. Silakan masukkan lagi.\n";
+            }
+        }
+
+        cout << "\nPerangkat yang Anda pilih:\n";
+        for (size_t i = 0; i < perangkatTerpilih.size(); i++) {
+            cout << "- " << perangkatTerpilih[i].nama << " (" << perangkatTerpilih[i].watt << "W, manfaat: " << perangkatTerpilih[i].manfaat << ")\n";
+        }
+
+        cout << "\nApakah data sudah benar? (y/n): ";
+        cin >> konfirmasi;
+        cin.ignore();
+
+        if (konfirmasi == 'y' || konfirmasi == 'Y') break;
+
+        cout << "\nSilakan ulangi input.\n";
+    }
