@@ -45,7 +45,7 @@ Perangkat perangkatArray[JUMLAH_PERANGKAT] = {
     {"Rice Cooker", 300, 7},
     {"Setrika", 400, 4},
     {"Televisi", 250, 7}
-}
+};
 
 return 0;
 }
