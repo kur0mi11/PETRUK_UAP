@@ -49,3 +49,57 @@ Perangkat perangkatArray[JUMLAH_PERANGKAT] = {
 
 return 0;
 }
+
+void tampilkanPerangkatPointer(const Perangkat* p) {
+    if (p != nullptr) {
+        cout << "- " << p->nama << " (" << p->watt << "W, manfaat: " << p->manfaat << ")\n";
+    }
+}
+
+void tampilkanPerangkat() {
+    cout << "\n============================================================\n";
+    cout << " DAFTAR PERANGKAT ELEKTRONIK\n";
+    cout << "============================================================\n";
+    for (int i = 0; i < JUMLAH_PERANGKAT; i++) {
+        tampilkanPerangkatPointer(&perangkatArray[i]);
+    }
+}
+
+void tampilkanJamMenit(double jam) {
+    int jam_utuh = (int)jam;
+    int menit = (int)round((jam - jam_utuh) * 60);
+    cout << jam_utuh << " jam " << menit << " menit";
+}
+
+HasilKnapsack knapsack(vector<Perangkat>& perangkat, int batasDaya) {
+    int n = perangkat.size();
+    vector<vector<int>> dp(n + 1, vector<int>(batasDaya + 1, 0));
+
+    for (int i = 1; i <= n; i++) {
+        for (int w = 0; w <= batasDaya; w++) {
+            if (perangkat[i - 1].watt <= w) {
+                dp[i][w] = max(dp[i - 1][w],
+                               dp[i - 1][w - perangkat[i - 1].watt] + perangkat[i - 1].manfaat);
+            } else {
+                dp[i][w] = dp[i - 1][w];
+            }
+        }
+    }
+
+    stack<Perangkat> stackPerangkat;
+    int w = batasDaya;
+    for (int i = n; i > 0; i--) {
+        if (dp[i][w] != dp[i - 1][w]) {
+            stackPerangkat.push(perangkat[i - 1]);
+            w -= perangkat[i - 1].watt;
+        }
+    }
+
+    vector<Perangkat> terpilih;
+    while (!stackPerangkat.empty()) {
+        terpilih.push_back(stackPerangkat.top());
+        stackPerangkat.pop();
+    }
+
+    return HasilKnapsack{dp[n][batasDaya], terpilih};
+}
