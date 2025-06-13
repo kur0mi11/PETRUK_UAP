@@ -6,7 +6,7 @@ Anggota Kelompok:
 3. Rizka Aprilia (2417051066)
 4. Achira Desya Lucy (2417051069)
 
-🔌 Smart Home Energy Management: Efisiensi Pemakaian Listrik Rumah Tangga Harian 🔌
+🔌 Smart Home Energy Management: Efisiensi Pemakaian Listrik Rumah Tangga Harian 🔌 
 Sebuah program C++ sederhana untuk mengelola konsumsi listrik harian perangkat rumah tangga secara efisien. Program ini menggunakan algoritma Knapsack Problem untuk memberikan rekomendasi perangkat mana saja yang sebaiknya digunakan, berdasarkan batas konsumsi daya yang ditentukan pengguna.
 
 📌 Fitur Utama
